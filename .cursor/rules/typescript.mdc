@@ -1,0 +1,129 @@
+---
+description: TypeScript & tsup
+globs: 
+alwaysApply: false
+---
+# TypeScript NPM Bundle Development Guidelines
+
+## Overview
+
+These guidelines are specifically tailored for developing NPM packages using TypeScript and tsup. They ensure consistency, maintainability, and optimal bundle output.
+
+## Tech Stack
+
+Core technologies:
+- TypeScript
+- tsup (for bundling)
+- Node.js
+- Zod (for runtime validation)
+- Lodash (utility functions)
+
+## Package Structure
+
+### Required Files
+- `package.json` - Package manifest
+- `tsconfig.json` - TypeScript configuration
+- `tsup.config.ts` - Bundle configuration
+- `src/index.ts` - Main entry point
+- `README.md` - Package documentation
+- `.gitignore` - Git ignore rules
+- `.npmignore` - NPM publish rules
+
+### Directory Structure
+```
+├── src/
+│   ├── index.ts
+│   ├── types/
+│   ├── utils/
+│   └── constants/
+├── tests/
+├── examples/
+└── docs/
+```
+
+## Bundle Configuration Rules
+
+### tsup Configuration
+- Always specify entry points explicitly
+- Configure separate builds for ESM and CommonJS
+- Include type declaration generation
+- Implement tree-shaking
+- Configure external dependencies appropriately
+- Include source maps in development
+
+### Package.json Requirements
+- Define both `main` and `module` fields
+- Specify `types` field for TypeScript declarations
+- List peer dependencies explicitly
+- Include appropriate package keywords
+- Define `files` array to control published contents
+
+## TypeScript Guidelines
+
+### Type Definitions
+- Export all public types from a central location
+- Use Zod schemas for runtime validation
+- Generate TypeScript types from Zod schemas
+- Avoid using `any` or `unknown` in public APIs
+- Mark internal types with `@internal` JSDoc tag
+
+### Code Organization
+- One export per file for better tree-shaking
+- Group related functionality in feature modules
+- Use barrel files (`index.ts`) for public APIs
+- Keep internal implementations in separate files
+
+## Development Standards
+
+### Code Quality
+- Implement comprehensive unit tests
+- Include integration tests for full workflows
+- Document all public APIs with JSDoc
+- Use ESLint with TypeScript rules
+- Implement Prettier for consistent formatting
+
+### Performance Considerations
+- Minimize bundle size through code splitting
+- Leverage tree-shaking for dead code elimination
+- Optimize dependencies through proper externalization
+- Use dynamic imports for large features
+
+### Documentation Requirements
+- Include installation instructions
+- Provide usage examples
+- Document all public APIs
+- Include TypeScript usage examples
+- Maintain a changelog
+
+## Version Control
+
+### Git Workflow
+- Use semantic versioning
+- Follow conventional commits
+- Maintain a clean commit history
+- Tag releases appropriately
+
+## Release Process
+
+### Pre-release Checklist
+- Run all tests
+- Check bundle size
+- Verify types generation
+- Test in a clean environment
+- Update documentation
+- Update changelog
+
+### Publishing
+- Use `npm publish --dry-run` first
+- Tag releases in git
+- Update package version
+- Generate documentation
+- Publish to NPM
+
+## Commands
+
+### Development
+- `npm run build` - Build the package
+- `npm run test` - Run tests
+- `npm run lint` - Lint code
+- `npm run format` - Format code
